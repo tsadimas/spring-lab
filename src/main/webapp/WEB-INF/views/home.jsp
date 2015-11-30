@@ -20,10 +20,13 @@
     <td>${employee.id}</td>
     <td>${employee.name}</td>
     <td>${employee.role}</td>
+    <td> <a href="/lab2/edit/${employee.id}">Edit employee</a></td>
+    <td><a href="<c:url value='/remove/${employee.id}'/> " > Delete </a></td>
   </tr>
 </c:forEach>
 </table>
 </section>
+<a href="<c:url value='/employee'/>">Add Employee</a>
 </body>
 </html>
 

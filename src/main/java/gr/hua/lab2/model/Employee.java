@@ -1,8 +1,12 @@
 package gr.hua.lab2.model;
 
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 public class Employee {
 	 
     private int id;
+    
     private String name;
     private String role;
      

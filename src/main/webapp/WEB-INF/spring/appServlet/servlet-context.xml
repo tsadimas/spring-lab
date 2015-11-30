@@ -24,5 +24,4 @@
 	<context:component-scan base-package="gr.hua.lab2" />
 	
 	
-	
 </beans:beans>
