@@ -54,8 +54,12 @@ public class HomeController {
 	}
 
 	@RequestMapping(value = "/addEmployee", method = RequestMethod.POST)
-	public String addEmployee(@ModelAttribute("newEmployee") Employee employee) {
+	public String addEmployee(@ModelAttribute("newEmployee") @Valid Employee employee, BindingResult result) {
 
+		 if (result.hasErrors()) {
+	            return "employee";
+	        }
+		 
 		if (employee.getId() == 0) {
 			employeeDAO.save(employee);
 		} else {
