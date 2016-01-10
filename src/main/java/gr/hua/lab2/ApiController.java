@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -60,17 +61,24 @@ public class ApiController {
    	 return empl;
     }
 	
+	@ExceptionHandler(Exception.class)
 	@RequestMapping(value = "/employee/remove/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public  @ResponseBody Employee paramdeleteEmployeeInJSON(@PathVariable Integer id)  {
+	public  @ResponseBody Employee paramdeleteEmployeeInJSON(@PathVariable Integer id) throws EmployeeNotFoundException {
+		Employee emp=null;
 		
-		Employee emp=employeeDAO.getById(id);
-		
+	
+		emp=employeeDAO.getById(id);
+		if (emp==null) {
+			throw new EmployeeNotFoundException();
+		}
 		employeeDAO.deleteById(id);
 		
 		return emp;
 		
 	}
+	
+	
 	    
 }
 
