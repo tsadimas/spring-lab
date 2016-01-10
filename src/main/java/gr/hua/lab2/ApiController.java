@@ -59,4 +59,20 @@ public class ApiController {
 	
    	 return empl;
     }
+	
+	@RequestMapping(value = "/employee/remove/{id}", method = RequestMethod.DELETE, produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public  @ResponseBody Employee paramdeleteEmployeeInJSON(@PathVariable Integer id)  {
+		
+		Employee emp=employeeDAO.getById(id);
+		
+		employeeDAO.deleteById(id);
+		
+		return emp;
+		
+	}
+	    
 }
+
+
+
