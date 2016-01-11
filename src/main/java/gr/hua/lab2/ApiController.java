@@ -56,8 +56,9 @@ public class ApiController {
 	Employee empl=new Employee();
 	empl.setName(name);
 	empl.setRole(role);
-		employeeDAO.save(empl);
-	
+	Integer i=employeeDAO.save(empl);
+	empl.setId(i);
+	System.out.println("Employee saved id = " + i);		
    	 return empl;
     }
 	

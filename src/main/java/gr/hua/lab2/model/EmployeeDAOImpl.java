@@ -10,6 +10,8 @@ import java.util.List;
  
 import javax.sql.DataSource;
 
+import com.mysql.jdbc.Statement;
+
 import gr.hua.lab2.model.Employee;
  
  
@@ -21,19 +23,30 @@ public class EmployeeDAOImpl implements EmployeeDAO {
         this.dataSource = dataSource;
     }
  
-    public void save(Employee employee) {
+    public Integer save(Employee employee) {
         String query = "insert into Employee (id, name, role) values (?,?,?)";
         Connection con = null;
         PreparedStatement ps = null;
+        Integer ret=0;
         try{
             con = dataSource.getConnection();
-            ps = con.prepareStatement(query);
+            ps = con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, employee.getId());
             ps.setString(2, employee.getName());
             ps.setString(3, employee.getRole());
             int out = ps.executeUpdate();
             if(out !=0){
-                System.out.println("Employee saved with id="+employee.getId());
+            	ResultSet generatedKeys = ps.getGeneratedKeys(); 
+                    if (generatedKeys.next()) {
+                    	Long  k=generatedKeys.getLong(1);
+                    	 System.out.println("Employee saved with id="+ k);
+                    	 ret=k.intValue();
+                    }
+                    else {
+                        throw new SQLException("Creating user failed, no ID obtained.");
+                    }
+               
+                
             }else System.out.println("Employee save failed with id="+employee.getId());
         }catch(SQLException e){
             e.printStackTrace();
@@ -45,6 +58,7 @@ public class EmployeeDAOImpl implements EmployeeDAO {
                 e.printStackTrace();
             }
         }
+        return ret;
     }
  
     public Employee getById(int id) {

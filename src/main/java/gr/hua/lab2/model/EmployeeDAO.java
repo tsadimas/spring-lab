@@ -7,7 +7,7 @@ import gr.hua.lab2.model.Employee;
 public interface EmployeeDAO {
      
     //Create
-    public void save(Employee employee);
+    public Integer save(Employee employee);
     //Read
     public Employee getById(int id);
     //Update
