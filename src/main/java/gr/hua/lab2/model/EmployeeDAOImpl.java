@@ -38,9 +38,8 @@ public class EmployeeDAOImpl implements EmployeeDAO {
             if(out !=0){
             	ResultSet generatedKeys = ps.getGeneratedKeys(); 
                     if (generatedKeys.next()) {
-                    	Long  k=generatedKeys.getLong(1);
-                    	 System.out.println("Employee saved with id="+ k);
-                    	 ret=k.intValue();
+                    	ret=generatedKeys.getInt(1);
+                    	 System.out.println("Employee saved with id="+ ret);
                     }
                     else {
                         throw new SQLException("Creating user failed, no ID obtained.");
