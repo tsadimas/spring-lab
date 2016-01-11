@@ -62,7 +62,6 @@ public class ApiController {
    	 return empl;
     }
 	
-	@ExceptionHandler(Exception.class)
 	@RequestMapping(value = "/employee/remove/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
 	public  @ResponseBody Employee paramdeleteEmployeeInJSON(@PathVariable Integer id) throws EmployeeNotFoundException {
