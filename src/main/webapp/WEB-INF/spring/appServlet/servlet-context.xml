@@ -21,6 +21,14 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
+	<beans:bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+
+		 <!-- setting maximum upload size -->
+		<beans:property name="maxUploadSize" value="100000" />
+
+	</beans:bean>
+	
 	<context:component-scan base-package="gr.hua.lab2" />
 	
 	
